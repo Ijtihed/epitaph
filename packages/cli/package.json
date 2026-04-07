@@ -1,0 +1,53 @@
+{
+  "name": "epitaph-dev",
+  "version": "0.1.0",
+  "description": "Scan your dependencies and find out which ones are dying. Maintenance health scoring for npm packages.",
+  "type": "module",
+  "bin": {
+    "epitaph": "./dist/epitaph.js",
+    "epitaph-dev": "./dist/epitaph.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests",
+    "lint": "tsc --noEmit",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist .turbo",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "dependencies": {
+    "@epitaph-dev/core": "*",
+    "chalk": "^5.4.0",
+    "commander": "^13.1.0",
+    "ora": "^8.2.0"
+  },
+  "keywords": [
+    "dependencies",
+    "health",
+    "maintenance",
+    "npm",
+    "audit",
+    "bus-factor",
+    "abandoned",
+    "deprecated",
+    "supply-chain",
+    "security",
+    "cli",
+    "devtools"
+  ],
+  "license": "MIT",
+  "author": "Ijtihed",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ijtihed/epitaph",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/Ijtihed/epitaph",
+  "bugs": "https://github.com/Ijtihed/epitaph/issues",
+  "engines": {
+    "node": ">=18"
+  }
+}

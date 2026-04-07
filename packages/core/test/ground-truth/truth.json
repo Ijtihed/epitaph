@@ -1,0 +1,202 @@
+[
+  {
+    "name": "request",
+    "category": "A: Clearly dead",
+    "expectedGrade": "F",
+    "reason": "Deprecated since Feb 2020, maintainer announced EOL"
+  },
+  {
+    "name": "tslint",
+    "category": "A: Clearly dead",
+    "expectedGrade": "F",
+    "reason": "Deprecated in favor of eslint, archived"
+  },
+  {
+    "name": "popper.js",
+    "category": "A: Clearly dead",
+    "expectedGrade": "F",
+    "reason": "Deprecated, replaced by @popperjs/core"
+  },
+  {
+    "name": "uglify-es",
+    "category": "A: Clearly dead",
+    "expectedGrade": "F",
+    "reason": "Deprecated, replaced by terser"
+  },
+  {
+    "name": "nomnom",
+    "category": "A: Clearly dead",
+    "expectedGrade": "F",
+    "reason": "Deprecated, unmaintained for years"
+  },
+
+  {
+    "name": "express",
+    "category": "B: Clearly alive",
+    "expectedMinGrade": "B",
+    "reason": "Active, many contributors, funded"
+  },
+  {
+    "name": "zod",
+    "category": "B: Clearly alive",
+    "expectedMinGrade": "B",
+    "reason": "Very active, growing rapidly"
+  },
+  {
+    "name": "esbuild",
+    "category": "B: Clearly alive",
+    "expectedMinGrade": "B",
+    "reason": "Active, maintained by Evan Wallace + contributors"
+  },
+  {
+    "name": "next",
+    "category": "B: Clearly alive",
+    "expectedMinGrade": "B",
+    "reason": "Extremely active, Vercel-backed"
+  },
+  {
+    "name": "fastify",
+    "category": "B: Clearly alive",
+    "expectedMinGrade": "B",
+    "reason": "Active, multiple maintainers, funded"
+  },
+
+  {
+    "name": "ms",
+    "category": "C: Done packages",
+    "expectedMinGrade": "C",
+    "expectedMaxGrade": "B",
+    "reason": "Complete utility, millions of downloads, no bugs"
+  },
+  {
+    "name": "escape-html",
+    "category": "C: Done packages",
+    "expectedMinGrade": "C",
+    "expectedMaxGrade": "B",
+    "reason": "Tiny finished utility"
+  },
+  {
+    "name": "inherits",
+    "category": "C: Done packages",
+    "expectedMinGrade": "C",
+    "expectedMaxGrade": "B",
+    "reason": "Node.js util, stable forever"
+  },
+  {
+    "name": "concat-map",
+    "category": "C: Done packages",
+    "expectedMinGrade": "C",
+    "expectedMaxGrade": "B",
+    "reason": "Tiny utility, 15M weekly downloads, done"
+  },
+  {
+    "name": "wrappy",
+    "category": "C: Done packages",
+    "expectedMinGrade": "C",
+    "expectedMaxGrade": "B",
+    "reason": "Tiny utility, complete"
+  },
+
+  {
+    "name": "chalk",
+    "category": "D: Single maintainer but active",
+    "expectedMinGrade": "B",
+    "reason": "Multiple contributors, fast issue response, well-funded across 5 platforms"
+  },
+  {
+    "name": "ora",
+    "category": "D: Single maintainer but active",
+    "expectedMinGrade": "C",
+    "expectedMaxGrade": "B",
+    "reason": "Sindre Sorhus solo but active"
+  },
+  {
+    "name": "got",
+    "category": "D: Single maintainer but active",
+    "expectedMinGrade": "C",
+    "expectedMaxGrade": "B",
+    "reason": "Sindre Sorhus solo but active"
+  },
+  {
+    "name": "p-limit",
+    "category": "D: Single maintainer but active",
+    "expectedMinGrade": "C",
+    "expectedMaxGrade": "B",
+    "reason": "Sindre solo, but actively maintained"
+  },
+  {
+    "name": "execa",
+    "category": "D: Single maintainer but active",
+    "expectedMinGrade": "C",
+    "expectedMaxGrade": "B",
+    "reason": "Sindre solo, but actively maintained"
+  },
+
+  {
+    "name": "moment",
+    "category": "E: Declining/concerning",
+    "expectedMinGrade": "D",
+    "expectedMaxGrade": "C",
+    "reason": "In maintenance mode, recommends alternatives"
+  },
+  {
+    "name": "lodash",
+    "category": "E: Declining/concerning",
+    "expectedMinGrade": "B",
+    "reason": "Recently active again, 4 contributors, sub-1-day issue response, 127M weekly downloads"
+  },
+  {
+    "name": "body-parser",
+    "category": "E: Declining/concerning",
+    "expectedMinGrade": "B",
+    "reason": "Actively maintained under expressjs org, funded, fast issue response, growing downloads"
+  },
+  {
+    "name": "colors",
+    "category": "E: Declining/concerning",
+    "expectedMinGrade": "F",
+    "expectedMaxGrade": "D",
+    "reason": "Sabotaged by maintainer in 2022, no contributors, declining downloads, slow issue response"
+  },
+  {
+    "name": "faker",
+    "category": "E: Declining/concerning",
+    "expectedMinGrade": "D",
+    "expectedMaxGrade": "C",
+    "reason": "Original was sabotaged, @faker-js/faker is the maintained fork"
+  },
+
+  {
+    "name": "event-stream",
+    "category": "F: Compromised / transferred",
+    "expectedGrade": "F",
+    "reason": "Backdoored via malicious contributor in 2018"
+  },
+  {
+    "name": "ua-parser-js",
+    "category": "F: Compromised / transferred",
+    "expectedMinGrade": "C",
+    "reason": "Was hijacked in 2021 but recovered, should reflect current state"
+  },
+  {
+    "name": "coa",
+    "category": "F: Compromised / transferred",
+    "expectedMinGrade": "D",
+    "expectedMaxGrade": "C",
+    "reason": "Was hijacked in 2021, reverted but largely unmaintained since; declining downloads"
+  },
+  {
+    "name": "rc",
+    "category": "F: Compromised / transferred",
+    "expectedMinGrade": "D",
+    "expectedMaxGrade": "C",
+    "reason": "Was hijacked in 2021, reverted but no human activity in 4 years; high downloads keep maturity exception"
+  },
+  {
+    "name": "node-ipc",
+    "category": "F: Compromised / transferred",
+    "expectedMinGrade": "D",
+    "expectedMaxGrade": "C",
+    "reason": "Maintainer added protestware in 2022"
+  }
+]

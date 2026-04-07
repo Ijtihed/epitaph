@@ -1,0 +1,44 @@
+{
+  "name": "@epitaph-dev/core",
+  "version": "0.1.0",
+  "description": "Core engine for epitaph — dependency maintenance health scoring.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "lint": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "keywords": [
+    "dependencies",
+    "health",
+    "maintenance",
+    "npm",
+    "security",
+    "supply-chain",
+    "scoring",
+    "bus-factor"
+  ],
+  "license": "MIT",
+  "author": "Ijtihed",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ijtihed/epitaph",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/Ijtihed/epitaph",
+  "bugs": "https://github.com/Ijtihed/epitaph/issues",
+  "engines": {
+    "node": ">=18"
+  }
+}

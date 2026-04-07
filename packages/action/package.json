@@ -1,0 +1,22 @@
+{
+  "name": "@epitaph-dev/action",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GitHub Action for epitaph — dependency health checks in CI.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests",
+    "lint": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": {
+    "@actions/core": "^3.0.0",
+    "@actions/github": "^9.0.0",
+    "@actions/http-client": "^4.0.0",
+    "@epitaph-dev/core": "*"
+  },
+  "license": "MIT",
+  "author": "Ijtihed"
+}

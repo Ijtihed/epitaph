@@ -1,0 +1,37 @@
+name: "epitaph"
+description: "Scan dependencies for maintenance health. Find abandoned, unmaintained, and at-risk packages."
+branding:
+  icon: "activity"
+  color: "red"
+
+inputs:
+  github-token:
+    description: "GitHub token for API access (enables GraphQL batching and deeper analysis)"
+    required: false
+    default: ${{ github.token }}
+  manifest:
+    description: "Path to manifest file (auto-detected if omitted)"
+    required: false
+  production-only:
+    description: "Only scan production dependencies (skip devDependencies)"
+    required: false
+    default: "true"
+  fail-grade:
+    description: "Fail the check if any dependency scores at or below this grade (A/B/C/D/F)"
+    required: false
+    default: "D"
+  ignore:
+    description: "Comma-separated list of packages to ignore (glob patterns supported, e.g. '@types/*')"
+    required: false
+
+outputs:
+  report:
+    description: "Full JSON health report"
+  dead-count:
+    description: "Number of dead (F-grade) dependencies"
+  has-failures:
+    description: "Whether any dependencies scored at or below fail-grade"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
