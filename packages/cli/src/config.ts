@@ -1,5 +1,5 @@
 import { readFile } from "node:fs/promises";
-import { resolve, dirname } from "node:path";
+import { resolve } from "node:path";
 import type { EpitaphConfig } from "epitaph-dev-core";
 
 const CONFIG_FILENAMES = [".epitaphrc.json", ".epitaphrc", "epitaph.config.json"];
