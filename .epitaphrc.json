@@ -1,0 +1,6 @@
+{
+  "production-only": false,
+  "fail-grade": "F",
+  "ignore": [],
+  "cache-ttl": 0
+}

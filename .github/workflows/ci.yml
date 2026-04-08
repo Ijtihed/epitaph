@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
 
 jobs:
   build-and-test:
@@ -22,7 +22,59 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
 
-      - run: npm ci
-      - run: npm run build
-      - run: npm run test
-      - run: npm run lint
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build all packages
+        run: npm run build
+
+      - name: Unit tests (104 tests across 13 suites)
+        run: npm run test
+
+      - name: Type check
+        run: npm run lint
+
+  ground-truth:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    # Only run on Node 20 — this hits live APIs, no need to triple-run it
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build core
+        run: npm run build -w packages/core
+
+      - name: Ground truth validation (30/30 packages)
+        run: npx tsx packages/core/test/ground-truth/validate.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  self-scan:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build CLI
+        run: npm run build -w packages/core && npm run build -w packages/cli
+
+      - name: Scan epitaph's own dependencies
+        run: node packages/cli/dist/epitaph.js --production-only --fail-grade F
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
