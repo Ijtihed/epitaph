@@ -5,5 +5,5 @@ export default defineConfig({
   format: ["esm"],
   clean: true,
   sourcemap: true,
-  noExternal: ["@epitaph-dev/core"],
+  noExternal: ["epitaph-dev-core"],
 });

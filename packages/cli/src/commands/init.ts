@@ -1,7 +1,7 @@
 import { writeFile, access } from "node:fs/promises";
 import { resolve } from "node:path";
 import chalk from "chalk";
-import { detectManifest, type EpitaphConfig } from "@epitaph-dev/core";
+import { detectManifest, type EpitaphConfig } from "epitaph-dev-core";
 
 const DEFAULT_IGNORE = [
   "@types/*",

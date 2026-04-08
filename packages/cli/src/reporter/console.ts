@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import type { HealthReport, DependencyHealth, Grade } from "@epitaph-dev/core";
+import type { HealthReport, DependencyHealth, Grade } from "epitaph-dev-core";
 
 const GRADE_COLORS: Record<Grade, (s: string) => string> = {
   A: chalk.green,

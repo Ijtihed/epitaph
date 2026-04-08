@@ -4,7 +4,7 @@ import {
   analyzeHealth,
   detectManifest,
   type Grade,
-} from "@epitaph-dev/core";
+} from "epitaph-dev-core";
 import { renderMarkdownReport } from "./reporter/markdown.js";
 
 const GRADE_ORDER: Record<Grade, number> = { A: 5, B: 4, C: 3, D: 2, F: 1 };

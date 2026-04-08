@@ -2,7 +2,7 @@ import { Command } from "commander";
 import { scan } from "../commands/scan.js";
 import { init } from "../commands/init.js";
 import { explain } from "../commands/explain.js";
-import type { Grade } from "@epitaph-dev/core";
+import type { Grade } from "epitaph-dev-core";
 
 const program = new Command();
 

@@ -6,7 +6,7 @@ import {
   type AnalyzeOptions,
   type Grade,
   type HealthReport,
-} from "@epitaph-dev/core";
+} from "epitaph-dev-core";
 import { renderConsoleReport } from "../reporter/console.js";
 import { renderJsonReport } from "../reporter/json.js";
 

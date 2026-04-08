@@ -1,5 +1,5 @@
 {
-  "name": "@epitaph-dev/core",
+  "name": "epitaph-dev-core",
   "version": "0.1.0",
   "description": "Core engine for epitaph — dependency maintenance health scoring.",
   "type": "module",

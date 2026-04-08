@@ -19,7 +19,7 @@ import {
   type RegistryInfo,
   type ScoringInput,
   type DownloadTrend,
-} from "@epitaph-dev/core";
+} from "epitaph-dev-core";
 
 export interface ExplainOptions {
   token?: string;

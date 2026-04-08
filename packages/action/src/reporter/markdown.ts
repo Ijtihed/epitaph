@@ -1,4 +1,4 @@
-import type { HealthReport, DependencyHealth, Grade } from "@epitaph-dev/core";
+import type { HealthReport, DependencyHealth, Grade } from "epitaph-dev-core";
 
 const GRADE_EMOJI: Record<Grade, string> = {
   A: "🟢",

@@ -23,7 +23,7 @@ jobs:
       - run: npm run build
       - run: npm test
 
-      - name: Publish @epitaph-dev/core
+      - name: Publish epitaph-dev-core
         run: npm publish --provenance --access public
         working-directory: packages/core
         env:
