@@ -310,7 +310,7 @@ export default function Home() {
               Better data with a token.
             </h2>
             <p className="font-[JetBrains_Mono] text-xs text-neutral-500 leading-relaxed text-center mb-12 max-w-xl mx-auto">
-              Without a token, epitaph uses npm data only — enough to catch deprecated and archived packages.
+              Without a token, epitaph uses npm data only. Enough to catch deprecated and archived packages.
               With a token, you get commit history, bus factor, issue response times, and funding data.
               That&apos;s what powers the D/C grades that catch slow-dying packages.
             </p>
@@ -333,8 +333,8 @@ export default function Home() {
                 {[
                   <>Go to <a href="https://github.com/settings/tokens" target="_blank" rel="noreferrer" className="text-neutral-300 underline underline-offset-2">github.com/settings/tokens</a></>,
                   <>Click <span className="text-neutral-300">Generate new token (classic)</span></>,
-                  <>Give it any name — e.g. <span className="text-neutral-300">epitaph</span></>,
-                  <>Select one scope: <span className="text-neutral-300 font-bold">public_repo</span> — read-only access to public repos</>,
+                  <>Give it any name, like <span className="text-neutral-300">epitaph</span></>,
+                  <>Select one scope: <span className="text-neutral-300 font-bold">public_repo</span> (read-only access to public repos)</>,
                   <>Copy the token and set it as <span className="text-neutral-300">GITHUB_TOKEN</span></>,
                 ].map((step, i) => (
                   <li key={i} className="flex items-start gap-3">
@@ -388,7 +388,7 @@ export default function Home() {
                   Add one file. Runs on every PR that touches <span className="text-neutral-300">package.json</span> and weekly on schedule.
                 </p>
                 <p className="font-[JetBrains_Mono] text-[0.65rem] text-neutral-600 leading-relaxed mb-5">
-                  No token setup needed — <span className="text-neutral-500">secrets.GITHUB_TOKEN</span> is injected automatically by GitHub on every run.
+                  No token setup needed. <span className="text-neutral-500">secrets.GITHUB_TOKEN</span> is injected automatically by GitHub on every run.
                 </p>
                 <div className="mt-auto">
                   <CopyBlock code={ACTION_YAML} lang=".github/workflows/epitaph.yml" />
