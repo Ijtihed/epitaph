@@ -14,6 +14,9 @@
 
 </div>
 
+<img width="1878" height="956" alt="image" src="https://github.com/user-attachments/assets/3ffa1cc1-8171-4503-b42b-fcf1ebabc31d" />
+
+
 ---
 
 > You already audit for CVEs. epitaph audits for abandonment. It reads your `package.json`, queries GitHub and npm, and grades every dependency A through F based on real maintenance signals. Bus factor 1, last human commit 14 months ago, maintainer account hijacked: epitaph finds it before it becomes your problem.
