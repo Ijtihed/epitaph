@@ -16,7 +16,7 @@
 
 ---
 
-> You already audit for CVEs. epitaph audits for abandonment. It reads your dependency manifest, checks every package against GitHub and npm, and tells you which ones are dead, dying, or on life support. Bus factor 1, last human commit 14 months ago, maintainer account hijacked — if your supply chain has a weak link, epitaph finds it.
+> You already audit for CVEs. epitaph audits for abandonment. It reads your `package.json`, checks every dependency against GitHub and npm, and grades each one A through F based on real maintenance signals — last human commit, contributor count, issue response time, funding, and download trends. Bus factor 1, last human commit 14 months ago, maintainer account hijacked — epitaph finds it before it becomes your problem.
 
 ---
 
@@ -26,18 +26,9 @@
 npx epitaph-dev
 ```
 
-Run in any project with a `package.json`. Zero config. Scans every dependency and grades it A through F.
-
-## How It Works
-
-1. **Reads your manifest** — parses `package.json` and extracts every dependency
-2. **Queries npm + GitHub** — fetches registry data, commit history, issue responsiveness, funding, download trends
-3. **Filters the noise** — excludes bot commits (Dependabot, Renovate, etc.) and non-source changes (lockfiles, CI configs, READMEs)
-4. **Scores and grades** — computes a 0–100 score across 8 weighted signals, assigns A/B/C/D/F
+Run in any project with a `package.json`. No install, no config. Results in seconds.
 
 ```
-$ npx epitaph-dev
-
   epitaph v0.1.0 — scanning package.json (47 dependencies)
 
   GRADE  PACKAGE                 SIGNALS
@@ -53,6 +44,64 @@ $ npx epitaph-dev
   47 scanned · 2 dead · 1 warning · 1 caution · 43 healthy
 ```
 
+---
+
+## GitHub Token (Recommended)
+
+Without a token, epitaph uses npm data only — download counts and registry info. That's enough to catch deprecated and archived packages.
+
+**With a token, you get the full picture:** commit history, bus factor, issue response times, and funding data. This is what powers the D/C grades that catch slow-dying packages before they become a problem.
+
+### Option 1 — Pass it inline
+
+```bash
+npx epitaph-dev --token YOUR_GITHUB_TOKEN
+```
+
+### Option 2 — Set it as an environment variable (recommended)
+
+```bash
+# Add to your shell profile (~/.bashrc, ~/.zshrc, etc.)
+export GITHUB_TOKEN=YOUR_GITHUB_TOKEN
+```
+
+Then just run `npx epitaph-dev` — it picks it up automatically every time.
+
+### How to create a token
+
+1. Go to [github.com/settings/tokens](https://github.com/settings/tokens)
+2. Click **Generate new token (classic)**
+3. Give it a name like `epitaph`
+4. Select scope: **`public_repo`** (read-only access to public repos — that's all epitaph needs)
+5. Copy the token and set it as `GITHUB_TOKEN`
+
+> epitaph only reads public repository data. It never writes anything to GitHub.
+
+---
+
+## How It Works
+
+1. **Reads your manifest** — parses `package.json` and collects all `dependencies` and `devDependencies`
+2. **Resolves each package** — fetches registry metadata from npm to get the repo URL, version history, and deprecation status
+3. **Queries GitHub** — for each package with a GitHub repo, fetches the last 12 months of commits (filtering out bots and non-source changes), open/closed issues, contributor list, and funding info
+4. **Fetches download trends** — pulls weekly download counts from the npm downloads API and computes whether each package is growing, stable, or declining
+5. **Scores 0–100** — computes a weighted score across 8 signals (see below), with special handling for "done" packages that are finished but not dead
+6. **Grades A–F** — maps the score to a letter grade and surfaces the most relevant signals as human-readable output
+
+---
+
+## What the Grades Mean
+
+| Grade | Score | Meaning |
+|-------|-------|---------|
+| **A** | 80–100 | Actively maintained. Multiple contributors, responsive, funded or widely used. |
+| **B** | 60–79 | Healthy. Recent activity, reasonable contributor count, no red flags. |
+| **C** | 40–59 | Stable but aging. Low activity or single maintainer, but still functional. |
+| **D** | 20–39 | At risk. Infrequent commits, bus factor 1, slow or no issue response. |
+| **F** | 0–19 | Dead, deprecated, archived, or compromised. Do not depend on this. |
+
+---
+
 ## What It Checks
 
 | Signal | Weight | What it catches |
@@ -66,11 +115,15 @@ $ npx epitaph-dev
 | **Archived** | instant F | Repo explicitly marked archived. No PRs, no fixes, no future. |
 | **Deprecated** | instant F | Package marked deprecated on the registry. |
 
-## "Done Package" Exception
+### "Done Package" Exception
 
-Packages like `ms` or `inherits` haven't been updated in years — because they're *finished*, not abandoned. If a package has >1M weekly downloads, no open security issues, and stable/growing usage, epitaph floors the score at C instead of failing it.
+Packages like `ms` or `inherits` haven't been updated in years — because they're *finished*, not abandoned. If a package has >1M weekly downloads and stable/growing usage, epitaph floors the score at C instead of failing it. Finished is not the same as dead.
+
+---
 
 ## GitHub Action
+
+Add epitaph to your CI in one file. It runs on every PR that touches `package.json` and on a weekly schedule.
 
 Create `.github/workflows/epitaph.yml`:
 
@@ -78,7 +131,7 @@ Create `.github/workflows/epitaph.yml`:
 name: epitaph
 on:
   schedule:
-    - cron: '0 9 * * 1'  # Monday 9am
+    - cron: '0 9 * * 1'  # every Monday 9am
   pull_request:
     paths: ['package.json']
 
@@ -94,11 +147,17 @@ jobs:
           production-only: true
 ```
 
-Posts a markdown table as a PR comment on manifest changes. Opens an issue on the weekly schedule if new dead deps are found.
+**No setup required.** `${{ secrets.GITHUB_TOKEN }}` is automatically provided by GitHub on every workflow run — you don't create or store any token yourself.
+
+What this does:
+- On every PR that modifies `package.json` — posts a health report as a PR comment and fails the check if any dependency scores D or below
+- Every Monday morning — opens an issue if any dependency has gone stale since your last PR
+
+---
 
 ## Configuration
 
-Create `.epitaphrc.json` or run `npx epitaph-dev init`:
+Create `.epitaphrc.json` in your project root, or run `npx epitaph-dev init` to generate one:
 
 ```json
 {
@@ -118,6 +177,8 @@ Create `.epitaphrc.json` or run `npx epitaph-dev init`:
 | `fail-grade` | `string` | `"D"` | Grade threshold for CI failure |
 | `weights` | `object` | see above | Custom scoring weights (must sum to 100) |
 | `cache-ttl` | `number` | `24` | Cache TTL in hours (0 to disable) |
+
+---
 
 ## CLI Reference
 
@@ -142,6 +203,8 @@ Options:
   --version              Show version
 ```
 
+---
+
 ## Why Not X?
 
 | Tool | What it does | What it doesn't do |
@@ -155,6 +218,8 @@ Options:
 
 **epitaph is the first tool that reads your manifest and tells you which dependencies are dying.** One command, all your deps, maintenance health grades.
 
+---
+
 ## Let AI Set It Up
 
 Paste into Cursor, Claude Code, or Copilot inside your project:
@@ -164,6 +229,8 @@ Add epitaph to this project. Create .github/workflows/epitaph.yml that runs
 on every PR using Ijtihed/epitaph@v1. Then run npx epitaph-dev locally and
 fix any dependency health issues it finds.
 ```
+
+---
 
 ## License
 

@@ -266,6 +266,93 @@ export default function Home() {
         {/* Divider */}
         <div className="w-16 h-px bg-neutral-800 mx-auto" />
 
+        {/* Grades */}
+        <section className="px-4 sm:px-6 py-16 md:py-28">
+          <div className="max-w-3xl mx-auto">
+            <p className="font-[JetBrains_Mono] text-xs text-neutral-600 uppercase tracking-[0.3em] mb-4 md:mb-6 text-center">
+              Grades
+            </p>
+            <h2 className="font-[Manrope] text-2xl sm:text-3xl md:text-4xl font-light text-white tracking-tight text-center mb-12 md:mb-16">
+              What each grade means.
+            </h2>
+            <div className="space-y-0">
+              {[
+                { grade: "A", range: "80–100", label: "text-emerald-400", desc: "Actively maintained. Multiple contributors, responsive to issues, funded or widely adopted." },
+                { grade: "B", range: "60–79", label: "text-green-400", desc: "Healthy. Recent commits, reasonable contributor count, no red flags." },
+                { grade: "C", range: "40–59", label: "text-yellow-400", desc: "Stable but aging. Low activity or single maintainer, but still functional. Watch it." },
+                { grade: "D", range: "20–39", label: "text-orange-400", desc: "At risk. Infrequent commits, bus factor 1, slow or no issue response. Plan a replacement." },
+                { grade: "F", range: "0–19",  label: "text-red-500",    desc: "Dead, deprecated, archived, or compromised. Do not depend on this." },
+              ].map(({ grade, range, label, desc }) => (
+                <div key={grade} className="flex items-start gap-6 py-5 border-b border-neutral-800/50 last:border-0">
+                  <span className={`font-[Manrope] text-xl font-extrabold shrink-0 w-6 ${label}`}>{grade}</span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-baseline justify-between gap-4 mb-1">
+                      <p className="font-[JetBrains_Mono] text-xs text-neutral-400">{desc}</p>
+                      <span className="font-[JetBrains_Mono] text-[0.65rem] text-neutral-600 shrink-0">{range}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Divider */}
+        <div className="w-16 h-px bg-neutral-800 mx-auto" />
+
+        {/* GitHub Token */}
+        <section className="px-4 sm:px-6 py-16 md:py-28">
+          <div className="max-w-3xl mx-auto">
+            <p className="font-[JetBrains_Mono] text-xs text-neutral-600 uppercase tracking-[0.3em] mb-4 md:mb-6 text-center">
+              GitHub Token
+            </p>
+            <h2 className="font-[Manrope] text-2xl sm:text-3xl md:text-4xl font-light text-white tracking-tight text-center mb-6 md:mb-10">
+              Better data with a token.
+            </h2>
+            <p className="font-[JetBrains_Mono] text-xs text-neutral-500 leading-relaxed text-center mb-12 max-w-xl mx-auto">
+              Without a token, epitaph uses npm data only — enough to catch deprecated and archived packages.
+              With a token, you get commit history, bus factor, issue response times, and funding data.
+              That&apos;s what powers the D/C grades that catch slow-dying packages.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+              <div className="border border-neutral-800 p-5 sm:p-6">
+                <p className="font-[Manrope] text-base text-white mb-3">Pass it inline</p>
+                <CopyBlock code="npx epitaph-dev --token YOUR_TOKEN" lang="bash" />
+              </div>
+              <div className="border border-neutral-800 p-5 sm:p-6">
+                <p className="font-[Manrope] text-base text-white mb-3">Set as env var (recommended)</p>
+                <CopyBlock code="export GITHUB_TOKEN=YOUR_TOKEN" lang="bash" />
+                <p className="font-[JetBrains_Mono] text-[0.65rem] text-neutral-600 mt-2">Add to ~/.bashrc or ~/.zshrc. epitaph picks it up automatically.</p>
+              </div>
+            </div>
+
+            <div className="border border-neutral-800 p-5 sm:p-6">
+              <p className="font-[Manrope] text-base text-white mb-4">How to create a token</p>
+              <ol className="space-y-2">
+                {[
+                  <>Go to <a href="https://github.com/settings/tokens" target="_blank" rel="noreferrer" className="text-neutral-300 underline underline-offset-2">github.com/settings/tokens</a></>,
+                  <>Click <span className="text-neutral-300">Generate new token (classic)</span></>,
+                  <>Give it any name — e.g. <span className="text-neutral-300">epitaph</span></>,
+                  <>Select one scope: <span className="text-neutral-300 font-bold">public_repo</span> — read-only access to public repos</>,
+                  <>Copy the token and set it as <span className="text-neutral-300">GITHUB_TOKEN</span></>,
+                ].map((step, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="font-[Manrope] text-sm text-neutral-700 shrink-0 w-4 pt-0.5">{i + 1}</span>
+                    <p className="font-[JetBrains_Mono] text-xs text-neutral-500 leading-relaxed">{step}</p>
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-5 font-[JetBrains_Mono] text-[0.65rem] text-neutral-600 leading-relaxed border-t border-neutral-800 pt-4">
+                epitaph only reads public repository data. It never writes to GitHub, never accesses private repos, and only needs the minimal <span className="text-neutral-500">public_repo</span> scope.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Divider */}
+        <div className="w-16 h-px bg-neutral-800 mx-auto" />
+
         {/* Get started */}
         <section className="px-4 sm:px-6 py-16 md:py-28">
           <div className="max-w-5xl mx-auto">
@@ -297,8 +384,11 @@ export default function Home() {
               {/* GitHub Action */}
               <div className="border border-neutral-800 p-5 sm:p-7 flex flex-col">
                 <p className="font-[Manrope] text-lg text-white mb-2">GitHub Action</p>
-                <p className="font-[JetBrains_Mono] text-[0.75rem] text-neutral-500 leading-relaxed mb-5">
-                  Add one file. Every PR and weekly schedule gets a health check.
+                <p className="font-[JetBrains_Mono] text-[0.75rem] text-neutral-500 leading-relaxed mb-3">
+                  Add one file. Runs on every PR that touches <span className="text-neutral-300">package.json</span> and weekly on schedule.
+                </p>
+                <p className="font-[JetBrains_Mono] text-[0.65rem] text-neutral-600 leading-relaxed mb-5">
+                  No token setup needed — <span className="text-neutral-500">secrets.GITHUB_TOKEN</span> is injected automatically by GitHub on every run.
                 </p>
                 <div className="mt-auto">
                   <CopyBlock code={ACTION_YAML} lang=".github/workflows/epitaph.yml" />
