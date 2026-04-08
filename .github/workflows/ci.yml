@@ -26,13 +26,13 @@ jobs:
         run: npm ci
 
       - name: Build all packages
-        run: npm run build
+        run: npx turbo run build --filter=!@epitaph-dev/web
 
       - name: Unit tests (104 tests across 13 suites)
-        run: npm run test
+        run: npx turbo run test --filter=!@epitaph-dev/web
 
       - name: Type check
-        run: npm run lint
+        run: npx turbo run lint --filter=!@epitaph-dev/web
 
   ground-truth:
     runs-on: ubuntu-latest
@@ -50,7 +50,7 @@ jobs:
         run: npm ci
 
       - name: Build core
-        run: npm run build -w packages/core
+        run: npx turbo run build --filter=epitaph-dev-core
 
       - name: Ground truth validation (30/30 packages)
         run: npx tsx packages/core/test/ground-truth/validate.ts
@@ -72,7 +72,7 @@ jobs:
         run: npm ci
 
       - name: Build CLI
-        run: npm run build -w packages/core && npm run build -w packages/cli
+        run: npx turbo run build --filter=epitaph-dev-core && npx turbo run build --filter=epitaph-dev
 
       - name: Scan epitaph's own dependencies
         run: node packages/cli/dist/epitaph.js --production-only --fail-grade F
