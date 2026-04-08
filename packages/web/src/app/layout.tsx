@@ -5,11 +5,19 @@ export const metadata: Metadata = {
   title: "epitaph",
   description:
     "Your dependencies are dying. epitaph finds the bodies. Maintenance health scoring for npm packages.",
+  metadataBase: new URL("https://epitaph.vercel.app"),
   openGraph: {
     title: "epitaph",
     description:
       "Scan your dependency manifest and grade every package on maintenance health. Find abandoned, unmaintained, and at-risk dependencies.",
+    url: "https://epitaph.vercel.app",
+    siteName: "epitaph",
     type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "epitaph",
+    description: "Your dependencies are dying. epitaph finds the bodies.",
   },
 };
 

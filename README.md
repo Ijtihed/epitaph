@@ -4,11 +4,12 @@
 <h3><em>Your dependencies are dying. epitaph finds the bodies.</em></h3>
 
 <p>
+  <a href="https://epitaph.vercel.app"><img src="https://img.shields.io/badge/Website-epitaph.vercel.app-000000?style=for-the-badge" alt="Website"></a>
   <a href="https://www.npmjs.com/package/epitaph-dev"><img src="https://img.shields.io/badge/npx-epitaph--dev-cb3837?style=for-the-badge&logo=npm&logoColor=white" alt="npx epitaph-dev"></a>
   <a href="https://github.com/Ijtihed/epitaph"><img src="https://img.shields.io/badge/Signals-8-8a9bb5?style=for-the-badge" alt="8 Signals"></a>
   <a href="https://github.com/Ijtihed/epitaph"><img src="https://img.shields.io/badge/Built_with-TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="Built with TypeScript"></a>
   <a href="https://github.com/Ijtihed/epitaph"><img src="https://img.shields.io/badge/Runtime-Node_18+-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node 18+"></a>
-  <a href="https://github.com/Ijtihed/epitaph/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT License"></a>
+  <a href="https://github.com/Ijtihed/epitaph/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT License"></a>
 </p>
 
 </div>
